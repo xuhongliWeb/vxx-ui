@@ -1,0 +1,15 @@
+{
+  "name": "cli-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "create-vxx": "create-vxx"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "create-vxx": "workspace:^1.0.0"
+  }
+}

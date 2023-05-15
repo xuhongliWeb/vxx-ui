@@ -1,0 +1,34 @@
+{
+  "name": "vxx-ui",
+  "version": "4.19.2",
+  "main": "lib/index.js",
+  "module": "es/index.mjs",
+  "files": [
+    "es",
+    "lib"
+  ],
+  "scripts": {
+    "release": "release-it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geeksdidi/vxxui"
+  },
+  "keywords": [
+    "vxx-ui",
+    "vue3组件库"
+  ],
+  "dependencies": {
+    "@vxx-ui/utils": "2.0.4"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "author": "小月",
+  "license": "MIT",
+  "description": "",
+  "typings": "lib/index.d.ts",
+  "devDependencies": {
+    "release-it": "^15.5.0"
+  }
+}

@@ -1,0 +1,835 @@
+本文正在参加「金石计划 . 瓜分 6 万现金大奖」
+
+本篇文章将为我们的组件库添加一个新成员:`Input`组件。其中`Input`组件要实现的功能有:
+
+- `基础用法`
+- `禁用状态`
+- `尺寸大小`
+- `输入长度`
+- `可清空`
+- `密码框`
+- `带Icon的输入框`
+- `文本域`
+- `自适应文本高度的文本域`
+- `复合型输入框`
+
+每个功能的实现代码都做了精简,方便大家快速定位到核心逻辑,接下来就开始对这些功能进行一一的实现。
+
+## 基础用法
+
+首先先新建一个`input.vue`文件,然后写入一个最基本的`input`输入框
+
+```vue
+<template>
+  <div class="k-input">
+    <input class="k-input__inner" />
+  </div>
+</template>
+```
+
+然后在我们的 vue 项目`examples`下的`app.vue`引入`Input`组件
+
+```vue
+<template>
+  <div class="Shake-demo">
+    <Input />
+  </div>
+</template>
+<script lang="ts" setup>
+import { Input } from "vxx-ui";
+</script>
+```
+
+此时页面上便出现了原生的输入框,所以需要对这个输入框进行样式的添加,在`input.vue`同级新建`style/index.less`,`Input`样式便写在这里
+
+```less
+.k-input {
+  font-size: 14px;
+  display: inline-block;
+  position: relative;
+
+  .k-input__inner {
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 15px;
+    width: 100%;
+    &::placeholder {
+      color: #c2c2ca;
+    }
+
+    &:hover {
+      border: 1px solid #c0c4cc;
+    }
+
+    &:focus {
+      border: 1px solid #409eff;
+    }
+  }
+}
+```
+
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b12194d84c214a83922c5b4c03f662f1~tplv-k3u1fbpfcp-watermark.image?)
+
+接下来要实现`Input`组件的核心功能:**双向数据绑定**。当我们在 vue 中使用`input`输入框的时候,我们可以直接使用`v-model`来实现**双向数据绑定**,`v-model`其实就是`value @input`结合的语法糖。而在 vue3 组件中使用`v-model`则表示的是`modelValue @update:modelValue`的语法糖。比如`Input`组件为例
+
+```vue
+<Input v-model="tel" />
+```
+
+其实就是
+
+```vue
+<Input :modelValue="tel" @update:modelValue="tel = $event" />
+```
+
+所以在`input.vue`中我们就可以根据这个来实现`Input`组件的**双向数据绑定**,这里我们使用`setup`语法
+
+```vue
+<template>
+  <div class="k-input">
+    <input
+      class="k-input__inner"
+      :value="inputProps.modelValue"
+      @input="changeInputVal"
+    />
+  </div>
+</template>
+<script lang="ts" setup>
+//组件命名
+defineOptions({
+  name: "k-input",
+});
+//组件接收的值类型
+type InputProps = {
+  modelValue?: string | number;
+};
+
+//组件发送事件类型
+type InputEmits = {
+  (e: "update:modelValue", value: string): void;
+};
+
+//withDefaults可以为props添加默认值等
+const inputProps = withDefaults(defineProps<InputProps>(), {
+  modelValue: "",
+});
+const inputEmits = defineEmits<InputEmits>();
+
+const changeInputVal = (event: Event) => {
+  inputEmits("update:modelValue", (event.target as HTMLInputElement).value);
+};
+</script>
+```
+
+![GIF333.gif](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f642eccfd55b462087877de8503d8032~tplv-k3u1fbpfcp-watermark.image?)
+
+到这里`基础用法`就完成了,接下来开始实现`禁用状态`
+
+## 禁用状态
+
+这个比较简单,只要根据`props`的`disabled`来赋予禁用类名即可
+
+```vue
+<template>
+  <div class="k-input" :class="styleClass">
+    <input
+      class="k-input__inner"
+      :value="inputProps.modelValue"
+      @input="changeInputVal"
+      :disabled="inputProps.disabled"
+    />
+  </div>
+</template>
+<script lang="ts" setup>
+//...
+type InputProps = {
+  modelValue?: string | number;
+  disabled?: boolean;
+};
+//...
+
+//根据props更改类名
+const styleClass = computed(() => {
+  return {
+    "is-disabled": inputProps.disabled,
+  };
+});
+</script>
+```
+
+然后给`is-disabled`写些样式
+
+```less
+//...
+
+.k-input.is-disabled {
+  .k-input__inner {
+    background-color: #f5f7fa;
+    border-color: #e4e7ed;
+    color: #c0c4cc;
+    cursor: not-allowed;
+    &::placeholder {
+      color: #c3c4cc;
+    }
+  }
+}
+```
+
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7d9e61468671488f8d2ee094b89bf4f8~tplv-k3u1fbpfcp-watermark.image?)
+
+## 尺寸
+
+按钮尺寸包括`medium`,`small`,`mini`,不传则是默认尺寸。同样的根据`props`的`size`来赋予不同类名
+
+```js
+const styleClass = computed(() => {
+  return {
+    "is-disabled": inputProps.disabled,
+    [`k-input--${inputProps.size}`]: inputProps.size,
+  };
+});
+```
+
+然后写这三个类名的不同样式
+
+```less
+//...
+.k-input.k-input--medium {
+  .k-input__inner {
+    height: 36px;
+    &::placeholder {
+      font-size: 15px;
+    }
+  }
+}
+
+.k-input.k-input--small {
+  .k-input__inner {
+    height: 32px;
+
+    &::placeholder {
+      font-size: 14px;
+    }
+  }
+}
+
+.k-input.k-input--mini {
+  .k-input__inner {
+    height: 28px;
+
+    &::placeholder {
+      font-size: 13px;
+    }
+  }
+}
+```
+
+## 继承原生 input 属性
+
+原生的`input`有`type`,`placeholder`等属性,这里可以使用 vue3 中的`useAttrs`来实现`props`穿透.子组件可以通过`v-bind`将`props`绑定
+
+```vue
+<template>
+  <div class="k-input" :class="styleClass">
+    <input
+      class="k-input__inner"
+      :value="inputProps.modelValue"
+      @input="changeInputVal"
+      :disabled="inputProps.disabled"
+      v-bind="attrs"
+    />
+  </div>
+</template>
+<script lang="ts" setup>
+//...
+
+const attrs = useAttrs();
+</script>
+```
+
+## 可清空
+
+通过`clearable`属性、`Input`的值是否为空以及是否鼠标是否移入来判断是否需要显示可清空图标。图标则使用组件库的`Icon`组件
+
+```vue
+<template>
+  <div
+    class="k-input"
+    @mouseenter="isEnter = true"
+    @mouseleave="isEnter = false"
+    :class="styleClass"
+  >
+    <input
+      class="k-input__inner"
+      :disabled="inputProps.disabled"
+      v-bind="attrs"
+      :value="inputProps.modelValue"
+      @input="changeInputVal"
+    />
+    <div
+      @click="clearValue"
+      v-if="inputProps.clearable && isClearAbled"
+      v-show="isFoucs"
+      class="k-input__suffix"
+    >
+      <Icon name="error" />
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+//...
+import Icon from "../icon/index";
+//...
+//双向数据绑定&接收属性
+type InputProps = {
+  modelValue?: string | number;
+  disabled?: boolean;
+  size?: string;
+  clearable?: boolean;
+};
+//...
+const isClearAbled = ref(false);
+const changeInputVal = (event: Event) => {
+  //可清除clearable
+  (event.target as HTMLInputElement).value
+    ? (isClearAbled.value = true)
+    : (isClearAbled.value = false);
+
+  inputEmits("update:modelValue", (event.target as HTMLInputElement).value);
+};
+
+//清除input value
+const isEnter = ref(true);
+const clearValue = () => {
+  inputEmits("update:modelValue", "");
+};
+</script>
+```
+
+清除图标部分 css 样式
+
+```less
+.k-input__suffix {
+  position: absolute;
+  right: 10px;
+  height: 100%;
+  top: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #c0c4cc;
+}
+```
+
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/159aaad8a4764edc86174f4e662653a5~tplv-k3u1fbpfcp-watermark.image?)
+
+## 密码框 show-password
+
+通过传入`show-password`属性可以得到一个可切换显示隐藏的密码框。这里要注意的是如果传了`clearable`则不会显示切换显示隐藏的图标
+
+```vue
+<template>
+  <div
+    class="k-input"
+    @mouseenter="isEnter = true"
+    @mouseleave="isEnter = false"
+    :class="styleClass"
+  >
+    <input
+      ref="ipt"
+      class="k-input__inner"
+      :disabled="inputProps.disabled"
+      v-bind="attrs"
+      :value="inputProps.modelValue"
+      @input="changeInputVal"
+    />
+    <div class="k-input__suffix" v-show="isShowEye">
+      <Icon @click="changeType" :name="eyeIcon" />
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+//...
+const attrs = useAttrs();
+
+//...
+
+//显示隐藏密码框 showPassword
+const ipt = ref();
+Promise.resolve().then(() => {
+  if (inputProps.showPassword) {
+    ipt.value.type = "password";
+  }
+});
+const eyeIcon = ref("browse");
+const isShowEye = computed(() => {
+  return (
+    inputProps.showPassword && inputProps.modelValue && !inputProps.clearable
+  );
+});
+const changeType = () => {
+  if (ipt.value.type === "password") {
+    eyeIcon.value = "eye-close";
+    ipt.value.type = attrs.type || "text";
+    return;
+  }
+  ipt.value.type = "password";
+  eyeIcon.value = "browse";
+};
+</script>
+```
+
+> 这里是通过获取`input`元素,然后通过它的`type`属性进行切换,其中`browse`和`eye-close`分别是`Icon`组件中眼睛开与闭,效果如下
+
+![password.gif](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b85f237f2a4141f6b2fab06e5e7a710a~tplv-k3u1fbpfcp-watermark.image?)
+
+## 带 Icon 的输入框
+
+通过`prefix-icon`和`suffix-icon` 属性可以为`Input`组件添加首尾图标。
+
+可以通过`计算属性`判断出是否显示首尾图标,防止和前面的`clearable`和`show-password`冲突.这里代码做了
+
+```vue
+<template>
+  <div class="k-input">
+    <input
+      ref="ipt"
+      class="k-input__inner"
+      :class="{ ['k-input--prefix']: isShowPrefixIcon }"
+      :disabled="inputProps.disabled"
+      v-bind="attrs"
+      :value="inputProps.modelValue"
+      @input="changeInputVal"
+    />
+
+    <div class="k-input__prefix" v-if="isShowPrefixIcon">
+      <Icon :name="inputProps.prefixIcon" />
+    </div>
+    <div class="k-input__suffix no-cursor" v-if="isShowSuffixIcon">
+      <Icon :name="inputProps.suffixIcon" />
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+//...
+type InputProps = {
+  prefixIcon?: string;
+  suffixIcon?: string;
+};
+
+//...
+
+//带Icon输入框
+const isShowSuffixIcon = computed(() => {
+  return (
+    inputProps.suffixIcon && !inputProps.clearable && !inputProps.showPassword
+  );
+});
+const isShowPrefixIcon = computed(() => {
+  return inputProps.prefixIcon;
+});
+</script>
+```
+
+相关样式部分
+
+```less
+.k-input__suffix,
+.k-input__prefix {
+  position: absolute;
+  right: 10px;
+  height: 100%;
+  top: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #c0c4cc;
+  font-size: 15px;
+}
+
+.no-cursor {
+  cursor: default;
+}
+
+.k-input--prefix.k-input__inner {
+  padding-left: 30px;
+}
+
+.k-input__prefix {
+  position: absolute;
+  width: 20px;
+  cursor: default;
+  left: 10px;
+}
+```
+
+在`app.vue`中使用效果如下
+
+```vue
+<template>
+  <div class="input-demo">
+    <Input v-model="tel" suffixIcon="edit" placeholder="请输入内容" />
+
+    <Input v-model="tel" prefixIcon="edit" placeholder="请输入内容" />
+  </div>
+</template>
+<script lang="ts" setup>
+import { Input } from "vxx-ui";
+import { ref } from "vue";
+const tel = ref("");
+</script>
+<style lang="less">
+.input-demo {
+  width: 200px;
+}
+</style>
+```
+
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/120889972cc640ba850dba34b3298d3f~tplv-k3u1fbpfcp-watermark.image?)
+
+## 文本域
+
+将`type`属性的值指定为`textarea`即可展示文本域模式。它绑定的事件以及属性和`input`基本一样
+
+```vue
+<template>
+  <div class="k-textarea" v-if="attrs.type === 'textarea'">
+    <textarea
+      class="k-textarea__inner"
+      :style="textareaStyle"
+      v-bind="attrs"
+      ref="textarea"
+      :value="inputProps.modelValue"
+      @input="changeInputVal"
+    />
+  </div>
+  <div
+    v-else
+    class="k-input"
+    @mouseenter="isEnter = true"
+    @mouseleave="isEnter = false"
+    :class="styleClass"
+  >
+    ...
+  </div>
+</template>
+```
+
+样式基本也就是`focus`,`hover`改变 border 颜色
+
+```less
+.k-textarea {
+  width: 100%;
+
+  .k-textarea__inner {
+    display: block;
+    padding: 5px 15px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: inherit;
+    color: #606266;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+
+    &::placeholder {
+      color: #c2c2ca;
+    }
+
+    &:hover {
+      border: 1px solid #c0c4cc;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid #409eff;
+    }
+  }
+}
+```
+
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9818fc2060cb418e8e0168cd7d0289e0~tplv-k3u1fbpfcp-watermark.image?)
+
+## 可自适应高度文本域
+
+组件可以通过接收`autosize`属性来开启自适应高度,同时`autosize`也可以传对象形式来指定最小和最大行高
+
+```js
+type AutosizeObj = {
+    minRows?: number
+    maxRows?: number
+}
+type InputProps = {
+    autosize?: boolean | AutosizeObj
+}
+```
+
+具体实现原理是通过监听输入框值的变化来调整`textarea`的样式,其中用到了一些原生的方法譬如`window.getComputedStyle(获取原生css对象)`,`getPropertyValue(获取css属性值)`等,所以原生`js`忘记的可以复习一下
+
+```js
+...
+const textareaStyle = ref<any>()
+const textarea = shallowRef<HTMLTextAreaElement>()
+watch(() => inputProps.modelValue, () => {
+    if (attrs.type === 'textarea' && inputProps.autosize) {
+        const minRows = isObject(inputProps.autosize) ? (inputProps.autosize as AutosizeObj).minRows : undefined
+        const maxRows = isObject(inputProps.autosize) ? (inputProps.autosize as AutosizeObj).maxRows : undefined
+        nextTick(() => {
+            textareaStyle.value = calcTextareaHeight(textarea.value!, minRows, maxRows)
+        })
+    }
+
+}, { immediate: true })
+```
+
+其中`calcTextareaHeight`为
+
+```js
+const isNumber = (val: any): boolean => {
+    return typeof val === 'number'
+}
+//隐藏的元素
+let hiddenTextarea: HTMLTextAreaElement | undefined = undefined
+
+//隐藏元素样式
+const HIDDEN_STYLE = `
+  height:0 !important;
+  visibility:hidden !important;
+  overflow:hidden !important;
+  position:absolute !important;
+  z-index:-1000 !important;
+  top:0 !important;
+  right:0 !important;
+`
+
+const CONTEXT_STYLE = [
+    'letter-spacing',
+    'line-height',
+    'padding-top',
+    'padding-bottom',
+    'font-family',
+    'font-weight',
+    'font-size',
+    'text-rendering',
+    'text-transform',
+    'width',
+    'text-indent',
+    'padding-left',
+    'padding-right',
+    'border-width',
+    'box-sizing',
+]
+
+type NodeStyle = {
+    contextStyle: string
+    boxSizing: string
+    paddingSize: number
+    borderSize: number
+}
+
+type TextAreaHeight = {
+    height: string
+    minHeight?: string
+}
+
+function calculateNodeStyling(targetElement: Element): NodeStyle {
+  //获取实际textarea样式返回并赋值给隐藏的textarea
+    const style = window.getComputedStyle(targetElement)
+
+    const boxSizing = style.getPropertyValue('box-sizing')
+
+    const paddingSize =
+        Number.parseFloat(style.getPropertyValue('padding-bottom')) +
+        Number.parseFloat(style.getPropertyValue('padding-top'))
+
+    const borderSize =
+        Number.parseFloat(style.getPropertyValue('border-bottom-width')) +
+        Number.parseFloat(style.getPropertyValue('border-top-width'))
+
+    const contextStyle = CONTEXT_STYLE.map(
+        (name) => `${name}:${style.getPropertyValue(name)}`
+    ).join(';')
+
+    return { contextStyle, paddingSize, borderSize, boxSizing }
+}
+
+export function calcTextareaHeight(
+    targetElement: HTMLTextAreaElement,
+    minRows = 1,
+    maxRows?: number
+): TextAreaHeight {
+    if (!hiddenTextarea) {
+      //创建隐藏的textarea
+        hiddenTextarea = document.createElement('textarea')
+        document.body.appendChild(hiddenTextarea)
+    }
+    //给隐藏的teatarea赋予实际textarea的样式以及值(value)
+    const { paddingSize, borderSize, boxSizing, contextStyle } =
+        calculateNodeStyling(targetElement)
+    hiddenTextarea.setAttribute('style', `${contextStyle};${HIDDEN_STYLE}`)
+    hiddenTextarea.value = targetElement.value || targetElement.placeholder || ''
+    //隐藏textarea整个高度,包括内边距padding,border
+    let height = hiddenTextarea.scrollHeight
+    const result = {} as TextAreaHeight
+    //判断boxSizing,返回实际高度
+    if (boxSizing === 'border-box') {
+        height = height + borderSize
+    } else if (boxSizing === 'content-box') {
+        height = height - paddingSize
+    }
+
+    hiddenTextarea.value = ''
+    //计算单行高度
+    const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize
+
+    if (isNumber(minRows)) {
+        let minHeight = singleRowHeight * minRows
+        if (boxSizing === 'border-box') {
+            minHeight = minHeight + paddingSize + borderSize
+        }
+        height = Math.max(minHeight, height)
+        result.minHeight = `${minHeight}px`
+    }
+    if (isNumber(maxRows)) {
+        let maxHeight = singleRowHeight * maxRows!
+        if (boxSizing === 'border-box') {
+            maxHeight = maxHeight + paddingSize + borderSize
+        }
+        height = Math.min(maxHeight, height)
+    }
+    result.height = `${height}px`
+    hiddenTextarea.parentNode?.removeChild(hiddenTextarea)
+    hiddenTextarea = undefined
+
+    return result
+}
+
+```
+
+> 这里的逻辑稍微复杂一点,大致就是创建一个隐藏的`textarea`,然后每次当输入框值发生变化时,将它的`value`赋值为组件的`textarea`的`value`,最后计算出这个隐藏的`textarea`的`scrollHeight`以及其它`padding`之类的值并作为高度返回赋值给组件中的`textarea`
+
+最后在`app.vue`中使用
+
+```vue
+<template>
+  <div class="input-demo">
+    <Input
+      v-model="tel"
+      :autosize="{ minRows: 2 }"
+      type="textarea"
+      suffixIcon="edit"
+      placeholder="请输入内容"
+    />
+  </div>
+</template>
+```
+
+![GIFtextarea.gif](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/51428313def9439abd2a312ecca8fe7b~tplv-k3u1fbpfcp-watermark.image?)
+
+## 复合型输入框
+
+我们可以使用复合型输入框来前置或者后置我们的元素,如下所示
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7aa2cef434be472183200625524d2650~tplv-k3u1fbpfcp-watermark.image?)
+
+这里我们借助 vue3 中的`slot`进行实现,其中用到了`useSlots`来判断用户使用了哪个插槽,从而展示不同样式
+
+```js
+import { useSlots } from "vue";
+
+//复合输入框
+const slots = useSlots();
+```
+
+同时`template`中接收前后两个插槽
+
+```vue
+<template>
+  <div
+    class="k-input"
+    @mouseenter="isEnter = true"
+    @mouseleave="isEnter = false"
+    :class="styleClass"
+  >
+    <div class="k-input__prepend" v-if="slots.prepend">
+      <slot name="prepend"></slot>
+    </div>
+    <input
+      ref="ipt"
+      class="k-input__inner"
+      :class="inputStyle"
+      :disabled="inputProps.disabled"
+      v-bind="attrs"
+      :value="inputProps.modelValue"
+      @input="changeInputVal"
+    />
+    <div class="k-input__append" v-if="slots.append">
+      <slot name="append"></slot>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+import { useSlots } from "vue";
+const styleClass = computed(() => {
+  return {
+    ["k-input-group k-input-prepend"]: slots.prepend,
+    ["k-input-group k-input-append"]: slots.append,
+  };
+});
+//复合输入框
+const slots = useSlots();
+</script>
+```
+
+最后给两个插槽写上样式就实现了**复合型输入框**啦
+
+```less
+.k-input.k-input-group.k-input-append,
+.k-input.k-input-group.k-input-prepend {
+  line-height: normal;
+  display: inline-table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  .k-input__inner {
+    border-radius: 0 4px 4px 0;
+  }
+
+  //复合输入框
+  .k-input__prepend,
+  .k-input__append {
+    background-color: #f5f7fa;
+    color: #909399;
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    border: 1px solid #dcdfe6;
+    border-radius: 4 0px 0px 4px;
+    padding: 0 20px;
+    width: 1px;
+    white-space: nowrap;
+  }
+
+  .k-input__append {
+    border-radius: 0 4px 4px 0px;
+  }
+}
+
+.k-input.k-input-group.k-input-append {
+  .k-input__inner {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}
+```

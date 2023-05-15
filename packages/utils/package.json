@@ -1,0 +1,16 @@
+{
+  "name": "@vxx-ui/utils",
+  "version": "2.0.4",
+  "main": "./index.ts",
+  "module": "./index.ts",
+  "description": "",
+  "keywords": [],
+  "files": [
+    "dist"
+  ],
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "build": "vite build"
+  }
+}

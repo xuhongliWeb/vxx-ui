@@ -1,0 +1,25 @@
+{
+  "name": "vxx-ui",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "files": [
+    "es",
+    "lib"
+  ],
+  "keywords": [
+    "vxx-ui",
+    "vue3组件库"
+  ],
+  "author": "小月",
+  "license": "MIT",
+  "description": "",
+  "typings": "lib/index.d.ts",
+  "dependencies": {
+    "@vxx-ui/utils": "workspace:2.0.4"
+  }
+}
