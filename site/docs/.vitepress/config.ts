@@ -6,7 +6,7 @@ import { mdPlugin } from './config/plugins'
 
 export default defineConfig({
   title: 'vxx UI',
-  base: process.env.NODE_ENV === 'production' ? '/docs/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/' : '/',
   head: [
 
     [
