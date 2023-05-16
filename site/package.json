@@ -4,7 +4,8 @@
   "scripts": {
     "docs:dev": "cross-env NODE_ENV=development vitepress dev docs",
     "docs:build": "cross-env NODE_ENV=production vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "docs:serve": "vitepress serve docs",
+    "deploy": "bash deploy.sh"
   },
   "dependencies": {
     "vxx-ui": "workspace:1.0.0",
