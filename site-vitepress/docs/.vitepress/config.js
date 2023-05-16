@@ -1,5 +1,5 @@
 export default {
-  base: process.env.NODE_ENV === 'production' ? '/vxxui/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/vxx-ui/' : '/',
   themeConfig: {
     siteTitle: false,
     logo: "/logo.png",
@@ -40,10 +40,6 @@ export default {
             {
               text: "Button按钮",
               link: "/examples/button/",
-            },
-            {
-              text: "Icon图标",
-              link: "/examples/Icon/",
             },
           ],
         },
