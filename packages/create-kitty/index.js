@@ -88,7 +88,7 @@ const gitClone = (remote, name, option) => {
   });
 };
 const remoteList = {
-  1: "https://gitee.com/geeksdidi/vxxui.git",
+  1: "https://github.com/xuhongliWeb/vxx-ui.git",
   2: 'xxx'
 }
 const branch = 'master'

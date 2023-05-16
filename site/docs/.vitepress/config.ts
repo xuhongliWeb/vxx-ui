@@ -26,7 +26,7 @@ export default defineConfig({
     socialLinks: [
       {
         icon: 'github',
-        link: 'https://gitee.com/geeksdidi/vxxui'
+        link: 'https://github.com/xuhongliWeb/vxx-ui'
       }
     ],
 

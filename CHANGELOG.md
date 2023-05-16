@@ -67,23 +67,23 @@
 * 修改文档样式 ([e991897](https://github.com/geeksdidi/vxxui/commit/e991897f9952e25a50d16f8e2cb46bfa2671b433))
 * uptate ([dcac65a](https://github.com/geeksdidi/vxxui/commit/dcac65a81e3f83f106bba6b8bbbf4eef3b4a244a))
 
-# [4.15.0](https://gitee.com/geeksdidi/vxxui/compare/v4.14.0...v4.15.0) (2022-10-27)
+# [4.15.0](https://github.com/xuhongliWeb/vxx-ui/compare/v4.14.0...v4.15.0) (2022-10-27)
 
 
 ### Bug Fixes
 
-* 修改npm仓库地址 ([b1774d0](https://gitee.com/geeksdidi/vxxui/commits/b1774d02a3045a80392d9750adf0de7abf74b01d))
-* 修改utils包入口 ([164938b](https://gitee.com/geeksdidi/vxxui/commits/164938bad06150ffa714cd8e44678f9f839d31df))
-* 以 script setup 编写组件时，组件注册名字是undefined ([5c71c86](https://gitee.com/geeksdidi/vxxui/commits/5c71c8612906e846ae273b03c1be28e51baf5062))
+* 修改npm仓库地址 ([b1774d0](https://github.com/xuhongliWeb/vxx-ui/commits/b1774d02a3045a80392d9750adf0de7abf74b01d))
+* 修改utils包入口 ([164938b](https://github.com/xuhongliWeb/vxx-ui/commits/164938bad06150ffa714cd8e44678f9f839d31df))
+* 以 script setup 编写组件时，组件注册名字是undefined ([5c71c86](https://github.com/xuhongliWeb/vxx-ui/commits/5c71c8612906e846ae273b03c1be28e51baf5062))
 
 
 ### Features
 
-* 新增kitty-cli ([eaef3f0](https://gitee.com/geeksdidi/vxxui/commits/eaef3f043bce29102acd561381992735843743e3))
-* add cli ([a71c1fb](https://gitee.com/geeksdidi/vxxui/commits/a71c1fbbd1e1f56ca1b727026300c3dc26a9cd8b))
-* cli实现带参命令 ([7566cf9](https://gitee.com/geeksdidi/vxxui/commits/7566cf9dbba84d360614cdc9403941211ed53030))
-* create-vxx ([4d6209e](https://gitee.com/geeksdidi/vxxui/commits/4d6209ee838707123d3e6c753322ed7b96e5d46d))
-* vitepress替换 ([92b75f6](https://gitee.com/geeksdidi/vxxui/commits/92b75f6691a2982ba031631c327bce704e9c9a7b))
+* 新增kitty-cli ([eaef3f0](https://github.com/xuhongliWeb/vxx-ui/commits/eaef3f043bce29102acd561381992735843743e3))
+* add cli ([a71c1fb](https://github.com/xuhongliWeb/vxx-ui/commits/a71c1fbbd1e1f56ca1b727026300c3dc26a9cd8b))
+* cli实现带参命令 ([7566cf9](https://github.com/xuhongliWeb/vxx-ui/commits/7566cf9dbba84d360614cdc9403941211ed53030))
+* create-vxx ([4d6209e](https://github.com/xuhongliWeb/vxx-ui/commits/4d6209ee838707123d3e6c753322ed7b96e5d46d))
+* vitepress替换 ([92b75f6](https://github.com/xuhongliWeb/vxx-ui/commits/92b75f6691a2982ba031631c327bce704e9c9a7b))
 
 # [4.14.0](https://github.com/geeksdidi/vxxui/compare/v4.11.0...v4.14.0) (2022-10-23)
 
