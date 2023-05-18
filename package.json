@@ -45,5 +45,8 @@
     "vite-plugin-libcss": "^1.0.5",
     "vitest": "^0.21.1",
     "vue": "^3.2.36"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue-jsx": "^3.0.1"
   }
 }

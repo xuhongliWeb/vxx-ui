@@ -2,6 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "strict": true,
     "target": "ES2015",
     "module": "ESNext",

@@ -1,6 +1,7 @@
 <template>
     <div class="shake">
         <k-input v-model="isshake" clearable></k-input>
+        <k-message v-model="isshake"></k-message>
     </div>
 </template>
 

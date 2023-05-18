@@ -104,7 +104,7 @@ importers:
         specifier: workspace:2.0.4
         version: link:../utils
 
-  packages/components/kitty-ui:
+  packages/components/vxx-ui:
     dependencies:
       '@vxx-ui/utils':
         specifier: 2.0.4
