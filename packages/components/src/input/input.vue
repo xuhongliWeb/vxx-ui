@@ -29,6 +29,11 @@
         </div>
     </div>
 </template>
+<script lang="ts">
+export default {
+    name: 'k-input'
+};
+</script>
 <script setup lang="ts">
 import './style/index.less'
 import { useAttrs, computed, ref, nextTick, shallowRef, watch, useSlots } from 'vue'
@@ -36,9 +41,6 @@ import Icon from '../icon/index'
 import { calcTextareaHeight } from './utils'
 import { isObject } from '@vxx-ui/utils'
 
-defineOptions({
-    name: 'k-input'
-})
 
 //双向数据绑定&接收属性
 type AutosizeObj = {

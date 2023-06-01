@@ -30,6 +30,7 @@
 
 <div class="example">
     <div>
+        <k-input  clearable></k-input>
         <k-button>默认按钮</k-button>
         <k-button icon="edit" type="primary">主要按钮</k-button>
         <k-button type="success">成功按钮</k-button>

@@ -2,6 +2,7 @@
     <div class="shake">
         <k-input v-model="isshake" clearable></k-input>
         <k-message v-model="isshake"></k-message>
+        <k-link type="primary" href="https://www.baidu.com/">link</k-link>
     </div>
 </template>
 

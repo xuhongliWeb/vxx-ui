@@ -1,7 +1,5 @@
 
 
-Icon组件是一个组件库中不可或缺的组件之一，本篇文章将带大家实现一个Icon组件。如果你想了解完整的组件库搭建，你可以先看[https://juejin.cn/post/7117886038126624805](使用Vite和TypeScript带你从零打造一个属于自己的Vue3组件库)。
-
 ## 引入字体图标
 
 字体图标我们引用阿里的[iconfont](https://www.iconfont.cn/collections/index)。首先注册登录然后进入 资源管理->我的项目->新建项目，如下图

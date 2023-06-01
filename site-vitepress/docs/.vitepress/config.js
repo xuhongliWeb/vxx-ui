@@ -41,6 +41,18 @@ export default {
               text: "Button按钮",
               link: "/examples/button/",
             },
+            {
+                text: "Icon图标",
+                link: "/examples/icon/",
+              },
+              {
+                text: "Input 输入框",
+                link: "/examples/input/",
+              },
+              {
+                text: "Link",
+                link: "/examples/link/",
+              },
           ],
         },
       ],
