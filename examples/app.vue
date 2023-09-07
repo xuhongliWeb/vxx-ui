@@ -1,8 +1,9 @@
 <template>
     <div class="shake">
+        <k-link href="#">link</k-link>
+        <k-button >测试</k-button>
         <k-input v-model="isshake" clearable></k-input>
-        <k-message v-model="isshake"></k-message>
-        <k-link type="primary" href="https://www.baidu.com/">link</k-link>
+        <k-modal v-model:visible="isshake"></k-modal>
     </div>
 </template>
 
