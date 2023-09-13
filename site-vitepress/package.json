@@ -16,6 +16,7 @@
     "vitepress": "1.0.0-alpha.13"
   },
   "dependencies": {
+    "vue": "3.2.25",
     "vxx-ui": "workspace:1.0.0"
   }
 }

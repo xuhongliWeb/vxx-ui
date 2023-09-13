@@ -12,9 +12,7 @@ Input 为受控组件，它总会显示 Vue 绑定值。
 ## 基础用法
 
 <div class="example">
-    <div>
-        <k-input v-model="input" placeholder="请输入内容"></k-input>
-    </div>
+    <k-button @click="handleClick">默认按钮</k-button>
 </div>
 
 

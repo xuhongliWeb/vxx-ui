@@ -42,7 +42,7 @@ export default {
               link: "/examples/button/",
             },
             {
-                text: "Icon图标1",
+                text: "Icon图标",
                 link: "/examples/icon/",
               },
               {
@@ -52,6 +52,10 @@ export default {
               {
                 text: "Link",
                 link: "/examples/link/",
+              },
+              {
+                text: "对话框Modal",
+                link: "/examples/modal/",
               },
           ],
         },
