@@ -6,8 +6,6 @@ export default <T>(comp: T) => {
         // 所以要加上这个条件
         const name = (comp as any).name || (comp as any).__name
         //注册组件
-        console.log(comp,'comp-component')
-        console.log(name,'name-component')
         app.component(name, comp as SFCWithInstall<T>)
     }
     return comp as SFCWithInstall<T>

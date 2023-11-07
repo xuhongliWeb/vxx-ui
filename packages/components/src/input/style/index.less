@@ -3,6 +3,15 @@
     display: inline-block;
     position: relative;
 
+.k-input.k-input--mini {
+    .k-input__inner {
+        height: 28px;
+
+        &::placeholder {
+            font-size: 13px;
+        }
+    }
+}
     .k-input__inner {
         background-color: #fff;
         border-radius: 4px;
@@ -83,36 +92,7 @@
     }
 }
 
-//size
-.k-input.k-input--medium {
-    .k-input__inner {
-        height: 36px;
 
-        &::placeholder {
-            font-size: 15px;
-        }
-    }
-}
-
-.k-input.k-input--small {
-    .k-input__inner {
-        height: 32px;
-
-        &::placeholder {
-            font-size: 14px;
-        }
-    }
-}
-
-.k-input.k-input--mini {
-    .k-input__inner {
-        height: 28px;
-
-        &::placeholder {
-            font-size: 13px;
-        }
-    }
-}
 
 .k-textarea {
     width: 100%;
@@ -182,5 +162,37 @@
     .k-input__inner {
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px
+    }
+}
+
+//size
+&.k-input--medium {
+    .k-input__inner {
+        height: 36px;
+
+        &::placeholder {
+            font-size: 15px;
+        }
+    }
+}
+
+.k-input.k-input--small {
+    .k-input__inner {
+        height: 32px;
+
+        &::placeholder {
+            font-size: 14px;
+        }
+    }
+}
+
+
+.k-input.k-input--mini {
+    .k-input__inner {
+        height: 28px;
+
+        &::placeholder {
+            font-size: 12px;
+        }
     }
 }

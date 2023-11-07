@@ -27,7 +27,6 @@
     <div>
         <k-link type="primary" disabled>主要链接</k-link>
     </div>
-
 </div>
 
 ::: details 显示代码
@@ -62,7 +61,13 @@
 ```
 
 :::
+## Attributes
 
+| 参数          | 说明         | 类型    | 可选值                                             | 默认  |
+| ------------- | ------------ | ------- | -------------------------------------------------- | ----- |
+| type          | 链接主色      | string  | -- /                             | —     |primary
+| underline          | 是否有下划线    | boolean  |      |false
+| disabled         | 禁用| boolean  |                                             |false
 <style>
    .example a {
         margin-right:10px;

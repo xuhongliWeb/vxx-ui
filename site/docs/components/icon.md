@@ -1,6 +1,6 @@
 # Icon 图标
 
-## 使用方法
+## 基础用法
 
 <div class="example">
     <div>
@@ -13,7 +13,7 @@
 ```html
 <template>
   <div>
-    <k-icon name="edit"></k-icon>
+    <k-icon name="edit" dot badge color='red'></k-icon>
   </div>
 </template>
 ```
@@ -24,7 +24,7 @@
 
 <div class="icon_content">
     <div class="icon_list">
-        <k-icon name="edit"></k-icon>
+        <k-icon name="edit" dot badge color='red'></k-icon>
         <div class="icon_name">edit</div>
     </div>
     <div class="icon_list">
@@ -104,7 +104,15 @@
         <div class="icon_name">arrow-double-right</div>
     </div>
 </div>
+:::
 
+## Attributes
+
+| 参数          | 说明         | 类型    | 可选值                                             | 默认  |
+| ------------- | ------------ | ------- | -------------------------------------------------- | ----- |
+| name          | 图标名称      | string  | -- /                             | —     |
+| dot          | 是否显示圆点    | boolean  |  | —     |false
+| color         | icon 颜色 | string | —                                                  | false |
 <style>
 .icon_content{
     overflow:hidden;

@@ -6,7 +6,6 @@ Input 为受控组件，它总会显示 Vue 绑定值。
 
 通常情况下，应当处理 input 事件，并更新组件的绑定值（或使用 v-model）。否则，输入框内显示的值将不会改变。
 
-不支持 v-model 修饰
 :::
 
 ## 基础用法
@@ -38,7 +37,7 @@ Input 为受控组件，它总会显示 Vue 绑定值。
 <ClientOnly>
 <div class="example">
     <div>
-        <k-input v-model="input" disabled placeholder="请输入内容"></k-input>
+        <k-input v-model="input2" disabled placeholder="请输入内容"></k-input>
     </div>
 </div>
 </ClientOnly>
@@ -107,10 +106,10 @@ Input 为受控组件，它总会显示 Vue 绑定值。
 
 <ClientOnly>
 <div class="example">
-<k-input v-model="input" style="width:202px" prefix-icon="edit" placeholder="请输入内容"></k-input>
+<k-input v-model="input3" style="width:202px" prefix-icon="edit" placeholder="请输入内容"></k-input>
 <br />
 <br />
-<k-input v-model="input" style="width:202px" suffix-icon="error" placeholder="请输入内容"></k-input>
+<k-input v-model="input4" style="width:202px" suffix-icon="error" placeholder="请输入内容"></k-input>
 </div>
 </ClientOnly>
 
@@ -200,14 +199,14 @@ Input 为受控组件，它总会显示 Vue 绑定值。
 
 <ClientOnly>
 <div class="example">
-  <k-input placeholder="请输入内容" v-model="input">
+  <k-input placeholder="请输入内容" v-model="input5">
    <template v-slot:prepend>
             http://
     </template>
   </k-input>
   <br />
   <br />
-  <k-input placeholder="请输入内容" v-model="input">
+  <k-input placeholder="请输入内容" v-model="input6">
    <template #append>
            .com
     </template>
@@ -240,16 +239,16 @@ Input 为受控组件，它总会显示 Vue 绑定值。
 
 <ClientOnly>
 <div class="example">
-<k-input placeholder="请输入内容" size="medium" v-model="input"></k-input>
+<k-input placeholder="请输入内容" size="medium" v-model="input7"></k-input>
 <br />
 <br />
-<k-input placeholder="请输入内容" size="medium" v-model="input"></k-input>
+<k-input placeholder="请输入内容" size="medium" v-model="input8"></k-input>
 <br />
 <br />
-<k-input placeholder="请输入内容" size="small" v-model="input"></k-input>
+<k-input placeholder="请输入内容" size="small" v-model="input9"></k-input>
 <br />
 <br />
-<k-input placeholder="请输入内容" size="mini" v-model="input"></k-input>
+<k-input placeholder="请输入内容" size="mini" v-model="input10"></k-input>
 </div>
 </ClientOnly>
 
@@ -271,8 +270,23 @@ Input 为受控组件，它总会显示 Vue 绑定值。
 :::
 
 <script setup lang="ts">
+   import { ref } from "vue";
   import demoVue1 from './demo/inputdemo1.vue'
   import demoVue2 from './demo/inputdemo2.vue'
   import demoVue3 from './demo/inputdemo3.vue'
   import demoVue4 from './demo/inputdemo4.vue'
+    const input = ref();
+    const input2 = ref();
+    const input3 = ref();
+    const input4 = ref();
+    const input5 = ref();
+    const input6 = ref();
+    const input7 = ref();
+    const input8 = ref();
+    const input9 = ref();
+    const input10 = ref();
+
 </script>
+
+
+

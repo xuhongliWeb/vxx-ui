@@ -1,0 +1,111 @@
+
+@import '../../../../common/theme.module.less';
+@import '../../../../common/index.less';
+@switch-cls: ~"@{prefix}-switch";
+
+.@{switch-cls} {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  min-width: 54px;
+  height: 24px;
+  cursor: pointer;
+  .no-select;
+
+  &-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    display: none;
+  }
+
+  &-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: @gary-5;
+    border: 1px solid @gary-5;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+
+    &-inner {
+      position: absolute;
+      right: 4px;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: @gary-10;
+    }
+
+    &-dot {
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 16px;
+      width: 16px;
+      background-color: @gary-1;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+  }
+
+  &-check {
+    background-color: @primary-6;
+    border: 1px solid @primary-6;
+    transition: all 0.2s ease;
+
+    .@{switch-cls}-slider-inner {
+      left: 4px;
+      right: 0;
+      color: @gary-1;
+      transition: all 0.2s ease;
+    }
+
+    .@{switch-cls}-slider-dot {
+      left: calc(100% - 20px);
+      transition: all 0.2s ease;
+
+      .switch-icon-loading {
+        color: @gary-7 !important;
+      }
+    }
+  }
+}
+
+.@{switch-cls}-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+// 加载
+.switch-icon-loading {
+  display: inline-block;
+  line-height: 1;
+  color: @gary-6;
+  animation: rotating 1s linear infinite;
+  -webkit-animation: rotating 1s linear infinite;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(365deg);
+  }
+}
+
