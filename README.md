@@ -32,9 +32,6 @@ import { Button } from 'vxx-ui'
 
 [Vite+TypeScript从零搭建Vue3组件库](https://juejin.cn/column/7118932817119019015)
 
-## 在线文档
-
-[KittyUI文档](https://geeksdidi.gitee.io/vxxui/)
 
 ## 使用仓库相关命令
 
