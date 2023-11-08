@@ -58,7 +58,6 @@ export default defineComponent({
                 loading.value = true;
                 const res = await props.onBeforeOk();
                 if (!res) return;
-
                 emit("update:modelValue", isCheck.value ? props.uncheckValue : props.checkValue);
             } catch (error) {
                 console.log("[ Switch -onBeforeOk error]", error);

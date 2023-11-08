@@ -57,6 +57,8 @@ pnpm run publish:vxx
 
 ### 启动文档
 
+- 进入site 目录
+
 pnpm run docs:dev
 
 ### 打包文档
