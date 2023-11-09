@@ -26,13 +26,7 @@ export const sidebar = {
         { text: 'Radio 单选框', link: '/components/radio' },
         { text: 'CheckBox 多选框', link: '/components/checkbox' },
         { text: 'Switch 开关', link: '/components/switch' },
-
         { text: 'Select 选择器', link: '/components/select' },
-        { text: 'Cascader 级联选择器', link: '/components/cascader' },
-        { text: 'Slider 滑块', link: '/components/slider' },
-        { text: 'TimePicker 时间选择器', link: '/components/timepicker' },
-        { text: 'DatePicker 日期选择器', link: '/components/datepicker' },
-        { text: 'DateTimePicker 日期时间选择器', link: '/components/datetimepicker' },
         { text: 'Upload 上传', link: '/components/upload' },
         { text: 'Rate 评分', link: '/components/rate' }
       ]

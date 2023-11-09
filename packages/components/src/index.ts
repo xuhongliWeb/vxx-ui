@@ -6,8 +6,10 @@ import { default as Modal } from './modal'
 import { default as Popconfirm } from './popconfirm'
 import { default as Image } from './image'
 import { default as Switch } from './Switch'
+import { default as Radio } from './Radio'
+import { default as radioGroup } from './Radio/src/radioGroup'
 
 export {
-    Switch,Button, Icon, Link, Input,Modal,Popconfirm,Image
+    Switch,Button, Icon, Link, Input,Modal,Popconfirm,Image,Radio,radioGroup
 }
-export default [Switch,Button, Icon, Link, Input,Modal,Popconfirm,Image] 
+export default [Switch,Button, Icon, Link, Input,Modal,Popconfirm,Image,Radio,radioGroup] 
