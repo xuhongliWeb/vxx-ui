@@ -15,7 +15,10 @@
     "vxx-ui",
     "vue3组件库"
   ],
-  "author": "小月",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": "xuhl",
   "license": "MIT",
   "description": "",
   "typings": "lib/index.d.ts",
