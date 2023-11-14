@@ -14,22 +14,28 @@ export const sidebar = {
       text: '基础组件',
       link: '/components/',
       items: [
-        { text: 'Button 按钮', link: '/components/button' },
-        { text: 'Icon 图标', link: '/components/icon' },
-        { text: 'Link 链接', link: '/components/link' },
+        { text: '按钮 Button ', link: '/components/button' },
+        { text: '图标 Icon ', link: '/components/icon' },
+        { text: '链接 Link ', link: '/components/link' },
       ]
     }, {
       text: 'Form 表单组件',
       link: '/components/',
       items: [
-        { text: 'Input 输入框', link: '/components/input' },
-        { text: 'Radio 单选框', link: '/components/radio' },
-        { text: 'CheckBox 多选框', link: '/components/checkbox' },
-        { text: 'Switch 开关', link: '/components/switch' },
-        { text: 'Select 选择器', link: '/components/select' },
-        { text: 'Upload 上传', link: '/components/upload' },
-        { text: 'Rate 评分', link: '/components/rate' }
+        { text: '输入框 Input ', link: '/components/input' },
+        { text: '单选框 Radio ', link: '/components/radio' },
+        { text: '多选框 CheckBox ', link: '/components/checkbox' },
+        { text: '开关 Switch ', link: '/components/switch' },
       ]
-    }
+    },
+     {
+        text: '反馈组件',
+        link: '/components/',
+        items: [
+          { text: '气泡确认 Popconfirm', link: '/components/popconfirm' },
+          { text: '对话框 Modal', link: '/components/modal' },
+          { text: '图片 Image', link: '/components/image' },
+        ]
+      }
   ]
 }

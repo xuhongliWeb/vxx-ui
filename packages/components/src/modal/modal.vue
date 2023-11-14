@@ -1,5 +1,6 @@
 <template>
     <teleport to="body">
+    <div :class="`${name}-container`" v-show="visible">
       <Transition name="fade-modal-mask">
         <div :class="`${name}-mask`" v-show="visible"></div>
       </Transition>
@@ -14,14 +15,18 @@
             <div :class="`${name}-body`">
               <slot></slot>
             </div>
-            <div :class="`${name}-footer`">
+           
+            <slot name="footer">
+                <div :class="`${name}-footer`">
                 <k-button @click="handleCancle">取消</k-button>
                 <k-button @click="handleOk" type="primary" status="primary">确认</k-button>
-              <slot name="footer"></slot>
             </div>
+            </slot>
+
           </div>
         </div>
       </Transition>
+    </div>
     </teleport>
   </template>
 
