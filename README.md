@@ -87,3 +87,7 @@ pnpm run coverage
 如果你发布的是公共包的话，在对应包下执行
 arduino复制代码pnpm publish --access public
 
+
+- 发布组件库
+- 发布 utils
+
