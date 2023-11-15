@@ -1,6 +1,6 @@
 {
   "name": "vxx-ui",
-  "version": "4.19.2",
+  "version": "1.0.5",
   "main": "lib/index.js",
   "module": "es/index.mjs",
   "files": [
@@ -12,22 +12,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/geeksdidi/vxxui"
+    "url": "https://github.com/xuhongliWeb/vxx-ui"
   },
   "keywords": [
     "vxx-ui",
     "vue3组件库"
   ],
-  "dependencies": {
-    "@vxx-ui/utils": "2.0.4"
-  },
   "sideEffects": [
     "**/*.css"
   ],
-  "author": "小月",
+  "author": "xuhl",
   "license": "MIT",
   "description": "",
   "typings": "lib/index.d.ts",
+  "dependencies": {
+    "@vxx-ui/utils": "workspace:2.0.4"
+  },
   "devDependencies": {
     "release-it": "^15.5.0"
   }

@@ -1,20 +1,20 @@
 <h1 align="center">
-    vxx-UI
+    Kitty-UI
 </h1>
 
-![v](https://img.shields.io/npm/v/vxx-ui)
-![d](https://img.shields.io/npm/dt/vxx-ui)
+![v](https://img.shields.io/npm/v/kitty-ui)
+![d](https://img.shields.io/npm/dt/kitty-ui)
 
 
 
 * 💪 Vue 3 Composition API
 * 🔥 Written in TypeScript
 
-<p align="center">vxx UI - A Vue.js 3 UI library</p>
+<p align="center">Kitty UI - A Vue.js 3 UI library</p>
 
 ## Install
 ```
-npm i vxx-ui
+npm i kitty-ui
 ```
 
 ## 快速开始
@@ -24,7 +24,7 @@ npm i vxx-ui
     <Button type="primary">按钮</Button>
 </template>
 <script lang="ts" setup>
-import { Button } from 'vxx-ui'
+import { Button } from 'kitty-ui'
 </script>
 ```
 
@@ -34,7 +34,7 @@ import { Button } from 'vxx-ui'
 
 ## 在线文档
 
-[KittyUI文档](https://geeksdidi.gitee.io/vxxui/)
+[KittyUI文档](https://geeksdidi.gitee.io/kittyui/)
 
 ## 使用仓库相关命令
 
@@ -52,11 +52,11 @@ pnpm run exm:dev
 
 ### 打包组件库
 
-pnpm run build:vxx
+pnpm run build:kitty
 
 ### 发布
 
-pnpm run publish:vxx
+pnpm run publish:kitty
 
 ### 启动文档
 
