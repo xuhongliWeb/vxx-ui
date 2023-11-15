@@ -1,9 +1,9 @@
 <h1 align="center">
-    Kitty-UI
+    vxx-ui
 </h1>
 
-![v](https://img.shields.io/npm/v/kitty-ui)
-![d](https://img.shields.io/npm/dt/kitty-ui)
+![v](https://img.shields.io/npm/v/vxx-ui)
+![d](https://img.shields.io/npm/dt/vxx-ui)
 
 
 
@@ -14,7 +14,7 @@
 
 ## Install
 ```
-npm i kitty-ui
+npm i vxx-ui
 ```
 
 ## 快速开始
@@ -24,7 +24,7 @@ npm i kitty-ui
     <Button type="primary">按钮</Button>
 </template>
 <script lang="ts" setup>
-import { Button } from 'kitty-ui'
+import { Button } from 'vxx-ui'
 </script>
 ```
 

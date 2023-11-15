@@ -82,7 +82,7 @@ pnpm run coverage
 ### 发布NPM
 
 
-发布之前记得到npm官网注册个账户,如果你要发布@xx/xx这种包的话需要在npm新建个组织组织组织名就是@后面的，比如我建的组织就是kitty-ui,注册完之后你就可以发布了
+发布之前记得到npm官网注册个账户,如果你要发布@xx/xx这种包的话需要在npm新建个组织组织组织名就是@后面的，比如我建的组织就是vxx-ui,注册完之后你就可以发布了
 首先要将我们代码提交到git仓库，不然pnpm发布无法通过，后面每次发版记得在对应包下执行 pnpm version patch你就会发现这个包的版本号patch(版本号第三个数) +1 了，同样的 pnpm version major major和 pnpm version minor 分别对应版本号的第一和第二位增加。
 如果你发布的是公共包的话，在对应包下执行
 arduino复制代码pnpm publish --access public
