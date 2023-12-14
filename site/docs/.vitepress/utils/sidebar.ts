@@ -17,6 +17,7 @@ export const sidebar = {
         { text: '按钮 Button ', link: '/components/button' },
         { text: '图标 Icon ', link: '/components/icon' },
         { text: '链接 Link ', link: '/components/link' },
+        { text: '加载 Loading ', link: '/components/spin' },
       ]
     }, {
       text: 'Form 表单组件',
