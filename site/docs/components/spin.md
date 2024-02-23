@@ -6,7 +6,7 @@
 
 <ClientOnly>
 <div class="example">
-     <k-spin loading/>
+     <k-spin :loading="false" />
 </div>
 </ClientOnly>
 
@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
     import { ref } from "vue";
-    const loading = ref(true);
+    const loading = ref(false);
     const loading1 = ref(true);
     
 </script>
